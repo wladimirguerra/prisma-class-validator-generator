@@ -1,5 +1,5 @@
 {
-  "name": "prisma-class-validator-generator",
+  "name": "@wladimirguerra/prisma-class-validator-generator",
   "version": "6.2.0",
   "description": "Prisma 2+ generator to emit typescript models of your database with class validator",
   "repository": "https://github.com/omar-dulaimi/prisma-class-validator-generator",
@@ -36,31 +36,33 @@
     "prisma-class-validator-generator"
   ],
   "license": "MIT",
+  "peerDependencies": {
+    "@prisma/client": "^7",
+    "prisma": "^7"
+  },
   "dependencies": {
-    "@prisma/client": "^6.19.0",
-    "@prisma/generator-helper": "^6.19.0",
-    "@prisma/internals": "^6.19.0",
-    "class-validator": "^0.14.2",
+    "@prisma/generator-helper": "^7",
+    "@prisma/internals": "^7",
+    "class-validator": "^0.15.1",
     "pluralize": "^8.0.0",
-    "prettier": "^3.6.2",
-    "ts-morph": "^27.0.2",
+    "prettier": "^3.8.3",
+    "ts-morph": "^28.0.0",
     "tslib": "^2.8.1"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^12.0.2",
-    "@semantic-release/npm": "^13.1.1",
-    "@semantic-release/release-notes-generator": "^14.1.0",
+    "@semantic-release/github": "^12.0.8",
+    "@semantic-release/npm": "^13.1.5",
+    "@semantic-release/release-notes-generator": "^14.1.1",
     "@types/node": "^24.10.0",
     "@types/pluralize": "0.0.33",
-    "@vitest/coverage-v8": "^4.0.8",
-    "conventional-changelog-conventionalcommits": "^9.1.0",
-    "prisma": "^6.19.0",
-    "semantic-release": "^25.0.2",
+    "@vitest/coverage-v8": "^4.1.5",
+    "conventional-changelog-conventionalcommits": "^9.3.1",
+    "semantic-release": "^25.0.3",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.8"
+    "vitest": "^4.1.5"
   },
   "bugs": {
     "url": "https://github.com/omar-dulaimi/prisma-class-validator-generator/issues"

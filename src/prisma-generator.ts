@@ -44,7 +44,7 @@ export async function generate(options: GeneratorOptions) {
 
   const prismaClientDmmf = await getDMMF({
     datamodel: options.datamodel,
-    previewFeatures: prismaClientProvider?.previewFeatures || [],
+    // previewFeatures: prismaClientProvider?.previewFeatures || [],
   });
 
   const enumNames = new Set<string>();
