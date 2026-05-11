@@ -91,7 +91,7 @@ describe('Relation Splitting Generation', () => {
     expect(user).toContain('extends UserBase');
 
     // Should import base class
-    expect(user).toContain('import { UserBase } from "./UserBase.model"');
+    expect(user).toContain('import { UserBase } from "./UserBase.model.js"');
 
     // Should import relation types
     expect(user).toContain('import { Post } from "./index.js"');

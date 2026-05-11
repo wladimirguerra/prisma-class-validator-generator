@@ -230,7 +230,7 @@ function generateRelationClass(
   // For self-relations in the Relations class, import the combined model class
   if (hasSelfRelation) {
     sourceFile.addImportDeclaration({
-      moduleSpecifier: `./${model.name}.model`,
+      moduleSpecifier: `./${model.name}.model.js`,
       namedImports: [model.name],
     });
   }
@@ -276,7 +276,7 @@ function generateCombinedClass(
 
   // Import base class
   sourceFile.addImportDeclaration({
-    moduleSpecifier: `./${model.name}Base.model`,
+    moduleSpecifier: `./${model.name}Base.model.js`,
     namedImports: [`${model.name}Base`],
   });
 

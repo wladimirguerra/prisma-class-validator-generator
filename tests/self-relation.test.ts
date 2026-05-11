@@ -66,7 +66,7 @@ describe('Self-Relation Generation', () => {
     expect(userRelations).toContain('isArray: true');
 
     // For self-relations in Relations class, should import from the combined model
-    expect(userRelations).toContain('import { User } from "./User.model"');
+    expect(userRelations).toContain('import { User } from "./User.model.js"');
 
     // Should NOT have scalar fields
     expect(userRelations).not.toContain('id!: number');
@@ -82,7 +82,7 @@ describe('Self-Relation Generation', () => {
     const userModel = readFileSync(userModelPath, 'utf-8');
 
     // Should import from UserBase
-    expect(userModel).toContain('import { UserBase } from "./UserBase.model"');
+    expect(userModel).toContain('import { UserBase } from "./UserBase.model.js"');
 
     // Should extend UserBase
     expect(userModel).toContain('export class User extends UserBase');

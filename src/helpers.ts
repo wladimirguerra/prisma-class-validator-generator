@@ -318,7 +318,7 @@ export function generateEnumsIndexFile(
 ) {
   sourceFile.addExportDeclarations(
     enumNames.sort().map<OptionalKind<ExportDeclarationStructure>>((name) => ({
-      moduleSpecifier: `./${name}.enum.ts`,
+      moduleSpecifier: `./${name}.enum.js`,
       namedExports: [name],
     })),
   );
