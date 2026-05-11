@@ -57,7 +57,7 @@ describe('Comprehensive Schema Generation', () => {
     const userContent = readFileSync(userPath, 'utf-8');
 
     // Check enum imports
-    expect(userContent).toContain('import { Role, Status } from "../enums"');
+    expect(userContent).toContain('import { Role, Status } from "../enums/index.js"');
     expect(userContent).toContain('@IsIn(getEnumValues(Role))');
     expect(userContent).toContain('@IsIn(getEnumValues(Status))');
   });

@@ -94,7 +94,7 @@ describe('Combined Class with separateRelationFields', () => {
     );
 
     // Check for relation type imports (from index file)
-    expect(userModel).toContain('import { Post } from "./"');
+    expect(userModel).toContain('import { Post } from "./index.js"');
 
     // Check that class extends UserBase
     expect(userModel).toContain('export class User extends UserBase');
@@ -126,7 +126,7 @@ describe('Combined Class with separateRelationFields', () => {
     );
 
     // Check for relation type imports (from index file)
-    expect(postModel).toContain('import { User } from "./"');
+    expect(postModel).toContain('import { User } from "./index.js"');
 
     // Check that class extends PostBase
     expect(postModel).toContain('export class Post extends PostBase');

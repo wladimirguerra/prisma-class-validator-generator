@@ -74,7 +74,7 @@ describe('Relation Splitting Generation', () => {
     expect(userRelations).not.toContain('email!: string');
 
     // Should import related models
-    expect(userRelations).toContain('import { Post } from "./"');
+    expect(userRelations).toContain('import { Post } from "./index.js"');
 
     // Should have decorators for relations
     expect(userRelations).toContain(
@@ -94,7 +94,7 @@ describe('Relation Splitting Generation', () => {
     expect(user).toContain('import { UserBase } from "./UserBase.model"');
 
     // Should import relation types
-    expect(user).toContain('import { Post } from "./"');
+    expect(user).toContain('import { Post } from "./index.js"');
 
     // Should include relation properties
     expect(user).toContain('posts!: Post[]');

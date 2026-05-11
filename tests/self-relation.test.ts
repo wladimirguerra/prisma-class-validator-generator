@@ -120,7 +120,7 @@ describe('Self-Relation Generation', () => {
     const index = readFileSync(indexPath, 'utf-8');
 
     // When separateRelationFields is enabled, index should export all classes
-    expect(index).toContain('export { User } from "./User.model"');
+    expect(index).toContain('export { User } from "./User.model.js"');
     // Note: UserBase and UserRelations might not be in index if only User is exported
     // This depends on the generator's index generation logic
   });

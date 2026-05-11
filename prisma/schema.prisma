@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma-client"
+  output   = "./prisma-client"
 }
 
 generator class_validator {

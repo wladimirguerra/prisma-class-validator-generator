@@ -24,7 +24,7 @@ export const generateModelsIndexFile = (
       .map((model) => model.name)
       .sort()
       .map<OptionalKind<ExportDeclarationStructure>>((modelName) => ({
-        moduleSpecifier: `./${modelName}.model`,
+        moduleSpecifier: `./${modelName}.model.js`,
         namedExports: [modelName],
       })),
   );
@@ -262,7 +262,7 @@ export const generateRelationImportsImport = (
   relationImports: Array<string>,
 ) => {
   sourceFile.addImportDeclaration({
-    moduleSpecifier: './',
+    moduleSpecifier: './index.js',
     namedImports: relationImports,
   });
 };
@@ -271,7 +271,7 @@ export const generateHelpersImports = (
   helpersImports: Array<string>,
 ) => {
   sourceFile.addImportDeclaration({
-    moduleSpecifier: '../helpers',
+    moduleSpecifier: '../helpers/index.js',
     namedImports: helpersImports,
   });
 };
@@ -286,7 +286,7 @@ export const generateEnumImports = (
 
   if (enumsToImport.length > 0) {
     sourceFile.addImportDeclaration({
-      moduleSpecifier: '../enums',
+      moduleSpecifier: '../enums/index.js',
       namedImports: enumsToImport,
     });
   }
@@ -318,7 +318,7 @@ export function generateEnumsIndexFile(
 ) {
   sourceFile.addExportDeclarations(
     enumNames.sort().map<OptionalKind<ExportDeclarationStructure>>((name) => ({
-      moduleSpecifier: `./${name}.enum`,
+      moduleSpecifier: `./${name}.enum.ts`,
       namedExports: [name],
     })),
   );
