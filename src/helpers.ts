@@ -7,6 +7,7 @@ import {
   Project,
   SourceFile,
 } from 'ts-morph';
+import type { GeneratorConfig } from './prisma-generator';
 
 export const generateModelsIndexFile = (
   prismaClientDmmf: PrismaDMMF.Document,
@@ -250,9 +251,12 @@ export const generateClassValidatorImport = (
   });
 };
 
-export const generatePrismaImport = (sourceFile: SourceFile) => {
+export const generatePrismaImport = (
+  sourceFile: SourceFile,
+  config: GeneratorConfig,
+) => {
   sourceFile.addImportDeclaration({
-    moduleSpecifier: '@prisma/client',
+    moduleSpecifier: `../${config.prismaClientPath}/browser.js`,
     namedImports: ['Prisma'],
   });
 };

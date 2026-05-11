@@ -70,6 +70,8 @@ describe('Comprehensive Schema Generation', () => {
 
     // Check JSON field handling
     expect(postContent).toContain('Prisma.JsonValue');
-    expect(postContent).toContain('import { Prisma } from "@prisma/client"');
+    expect(postContent).toContain(
+      'import { Prisma } from "../../basic-client/browser.js"',
+    );
   });
 });

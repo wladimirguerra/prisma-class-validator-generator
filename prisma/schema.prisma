@@ -1,10 +1,11 @@
 generator client {
   provider = "prisma-client"
-  output   = "./prisma-client"
+  output   = "./generated/prisma-client"
 }
 
 generator class_validator {
   provider = "node ./lib/generator.js"
+  output   = "./generated"
 }
 
 datasource db {

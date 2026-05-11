@@ -50,7 +50,7 @@ function generateSingleClass(
   ];
 
   if (shouldImportPrisma(model.fields as PrismaDMMF.Field[])) {
-    generatePrismaImport(sourceFile);
+    generatePrismaImport(sourceFile, config);
   }
 
   generateClassValidatorImport(sourceFile, validatorImports as Array<string>);
@@ -144,7 +144,7 @@ function generateBaseClass(
   ];
 
   if (shouldImportPrisma(fields as PrismaDMMF.Field[])) {
-    generatePrismaImport(sourceFile);
+    generatePrismaImport(sourceFile, config);
   }
 
   generateClassValidatorImport(sourceFile, validatorImports as Array<string>);
