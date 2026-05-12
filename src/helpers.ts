@@ -56,7 +56,7 @@ export const getTSDataTypeFromFieldType = (field: PrismaDMMF.Field) => {
       type = 'boolean';
       break;
     case 'Decimal':
-      type = 'Prisma.Decimal';
+      type = 'typeof Prisma.Decimal';
       break;
     case 'Json':
       type = 'Prisma.JsonValue';
