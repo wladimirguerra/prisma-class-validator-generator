@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     testTimeout: 300000, // 5 minutes for complex generation tests
-    hookTimeout: 60000,  // 1 minute for setup/teardown
+    hookTimeout: 60000, // 1 minute for setup/teardown
     globals: true,
     setupFiles: ['tests/setup.ts'],
     coverage: {
@@ -16,8 +16,8 @@ export default defineConfig({
         'package/**',
         'prisma/generated/**',
         'tests/coverage/**',
-        '**/*.d.ts'
-      ]
-    }
-  }
+        '**/*.d.ts',
+      ],
+    },
+  },
 });

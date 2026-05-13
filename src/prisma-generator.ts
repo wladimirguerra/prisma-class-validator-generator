@@ -49,7 +49,9 @@ export async function generate(options: GeneratorOptions) {
   const prismaOutputDir = parseEnvValue(prismaClientProvider.output);
 
   if (!prismaOutputDir) {
-    throw new Error('Prisma Class Validator Generator requires a Prisma Client generator with provider "prisma-client" or "prisma-client-js".');
+    throw new Error(
+      'Prisma Class Validator Generator requires a Prisma Client generator with provider "prisma-client" or "prisma-client-js".',
+    );
   }
 
   const prismaClientPath = path.relative(outputDir, prismaOutputDir);
@@ -97,8 +99,6 @@ export async function generate(options: GeneratorOptions) {
     );
     generateEnumsIndexFile(enumsIndexSourceFile, [...enumNames]);
   }
-
-
 
   prismaClientDmmf.datamodel.models.forEach((model) =>
     generateClass(project, config, model),

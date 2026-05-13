@@ -220,7 +220,10 @@ export const getDecoratorsByFieldType = (
     });
     decorators.push({
       name: 'Transform',
-      arguments: [`(value) => new Prisma.Decimal(value)`, `{ toClassOnly: true }`],
+      arguments: [
+        `(value) => new Prisma.Decimal(value)`,
+        `{ toClassOnly: true }`,
+      ],
     });
   }
 
@@ -326,7 +329,7 @@ export const getDecoratorsImportsByType = (field: PrismaDMMF.Field) => {
   if (field.kind === 'enum') {
     validatorImports.add('IsIn');
   }
-  if (field.kind === 'object'){
+  if (field.kind === 'object') {
     validatorImports.add('ValidateNested');
   }
   return [...validatorImports];

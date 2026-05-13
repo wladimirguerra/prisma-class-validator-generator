@@ -82,7 +82,9 @@ describe('Self-Relation Generation', () => {
     const userModel = readFileSync(userModelPath, 'utf-8');
 
     // Should import from UserBase
-    expect(userModel).toContain('import { UserBase } from "./UserBase.model.js"');
+    expect(userModel).toContain(
+      'import { UserBase } from "./UserBase.model.js"',
+    );
 
     // Should extend UserBase
     expect(userModel).toContain('export class User extends UserBase');

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write  # Required for OIDC (NPM)
+  id-token: write # Required for OIDC (NPM)
   contents: read
 
 jobs:

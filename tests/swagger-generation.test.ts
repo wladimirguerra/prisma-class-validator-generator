@@ -83,7 +83,9 @@ describe('Combined Class with separateRelationFields', () => {
     const userModel = readFileSync(userModelPath, 'utf-8');
 
     // Check that it imports from UserBase
-    expect(userModel).toContain('import { UserBase } from "./UserBase.model.js"');
+    expect(userModel).toContain(
+      'import { UserBase } from "./UserBase.model.js"',
+    );
 
     // Check for class-validator imports
     expect(userModel).toContain(
@@ -117,7 +119,9 @@ describe('Combined Class with separateRelationFields', () => {
     const postModel = readFileSync(postModelPath, 'utf-8');
 
     // Check that it imports from PostBase
-    expect(postModel).toContain('import { PostBase } from "./PostBase.model.js"');
+    expect(postModel).toContain(
+      'import { PostBase } from "./PostBase.model.js"',
+    );
 
     // Check for class-validator imports for optional relation
     expect(postModel).toContain(

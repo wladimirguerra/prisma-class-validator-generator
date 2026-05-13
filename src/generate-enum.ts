@@ -16,14 +16,12 @@ export default function generateEnum(
   sourceFile.addEnum({
     isExported: true,
     name: enumItem.name,
-    members: enumItem.values.map<OptionalKind<EnumMemberStructure>>(
-      (value) => {
-        const name = typeof value === 'string' ? value : value.name;
-        return {
-          name,
-          value: name,
-        };
-      },
-    ),
+    members: enumItem.values.map<OptionalKind<EnumMemberStructure>>((value) => {
+      const name = typeof value === 'string' ? value : value.name;
+      return {
+        name,
+        value: name,
+      };
+    }),
   });
 }
