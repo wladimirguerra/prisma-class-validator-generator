@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { beforeEach, afterEach } from 'vitest';
 
 const baseEnv = { ...process.env };

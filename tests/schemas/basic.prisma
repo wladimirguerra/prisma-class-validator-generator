@@ -27,6 +27,7 @@ model Post {
   content   String?
   published Boolean  @default(false)
   viewCount Int      @default(0)
+  value     Decimal  @default(0.0)
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
   rating    Float

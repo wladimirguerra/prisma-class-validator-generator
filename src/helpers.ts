@@ -147,19 +147,31 @@ export const getDecoratorsByFieldType = (
     case 'Int':
       decorators.push({
         name: 'IsInt',
-        arguments: [],
+        arguments: field.isList ? [`{ each:true }`] : [],
+      });
+      decorators.push({
+        name: 'Type',
+        arguments: [`() => Number`],
       });
       break;
     case 'Float':
       decorators.push({
         name: 'IsNumber',
-        arguments: [],
+        arguments: field.isList ? [`{ each:true }`] : [],
+      });
+      decorators.push({
+        name: 'Type',
+        arguments: [`() => Number`],
       });
       break;
     case 'DateTime':
       decorators.push({
         name: 'IsDate',
-        arguments: [],
+        arguments: field.isList ? [`{ each:true }`] : [],
+      });
+      decorators.push({
+        name: 'Type',
+        arguments: [`() => Date`],
       });
       break;
     case 'String':
@@ -171,7 +183,11 @@ export const getDecoratorsByFieldType = (
     case 'Boolean':
       decorators.push({
         name: 'IsBoolean',
-        arguments: [],
+        arguments: field.isList ? [`{ each:true }`] : [],
+      });
+      decorators.push({
+        name: 'Type',
+        arguments: [`() => Boolean`],
       });
       break;
   }
@@ -187,6 +203,10 @@ export const getDecoratorsByFieldType = (
     });
   }
   if (field.kind === 'object') {
+    decorators.push({
+      name: 'ValidateNested',
+      arguments: field.isList ? [`{ each:true }`] : [],
+    });
     decorators.push({
       name: 'Type',
       arguments: [`() => ${field.type}`],
@@ -305,6 +325,9 @@ export const getDecoratorsImportsByType = (field: PrismaDMMF.Field) => {
   }
   if (field.kind === 'enum') {
     validatorImports.add('IsIn');
+  }
+  if (field.kind === 'object'){
+    validatorImports.add('ValidateNested');
   }
   return [...validatorImports];
 };

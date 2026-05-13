@@ -93,7 +93,7 @@ describe('Self-Relation Generation', () => {
 
     // Should have class-validator imports
     expect(userModel).toContain(
-      'import { IsOptional, IsDefined } from "class-validator"',
+      'import { IsOptional, ValidateNested, IsDefined } from "class-validator"',
     );
 
     // Should have Swagger imports

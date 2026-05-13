@@ -39,7 +39,8 @@
   "peerDependencies": {
     "@prisma/client": "^7",
     "prisma": "^7",
-    "class-transformer":"*"
+    "class-transformer":"*",
+    "reflect-metadata":"*"
   },
   "dependencies": {
     "@prisma/generator-helper": "^7",
@@ -63,7 +64,8 @@
     "conventional-changelog-conventionalcommits": "^9.3.1",
     "semantic-release": "^25.0.3",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.5",
+    "reflect-metadata": "latest"
   },
   "bugs": {
     "url": "https://github.com/omar-dulaimi/prisma-class-validator-generator/issues"

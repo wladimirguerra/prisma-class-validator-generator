@@ -86,7 +86,9 @@ describe('Combined Class with separateRelationFields', () => {
     expect(userModel).toContain('import { UserBase } from "./UserBase.model.js"');
 
     // Check for class-validator imports
-    expect(userModel).toContain('import { IsDefined } from "class-validator"');
+    expect(userModel).toContain(
+      'import { IsDefined, ValidateNested } from "class-validator"',
+    );
 
     // Check for Swagger imports
     expect(userModel).toContain(
@@ -118,7 +120,9 @@ describe('Combined Class with separateRelationFields', () => {
     expect(postModel).toContain('import { PostBase } from "./PostBase.model.js"');
 
     // Check for class-validator imports for optional relation
-    expect(postModel).toContain('import { IsOptional } from "class-validator"');
+    expect(postModel).toContain(
+      'import { IsOptional, ValidateNested } from "class-validator"',
+    );
 
     // Check for Swagger imports
     expect(postModel).toContain(
