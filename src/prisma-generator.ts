@@ -5,7 +5,13 @@ import path from 'path';
 import generateClass from './generate-class';
 import generateEnum from './generate-enum';
 import { generateHelpersIndexFile } from './generate-helpers';
-import { generateEnumsIndexFile, generateModelsIndexFile } from './helpers';
+import generateSchemaObject from './generate-schema-object';
+import {
+  generateEnumsIndexFile,
+  generateInputsIndexFile,
+  generateModelsIndexFile,
+  generateOutputsIndexFile,
+} from './helpers';
 import { project } from './project';
 import removeDir from './utils/removeDir';
 
@@ -69,6 +75,20 @@ export async function generate(options: GeneratorOptions) {
     generateEnum(project, outputDir, enumItem);
   });
 
+  prismaClientDmmf.schema.enumTypes.prisma.forEach((enumItem) => {
+    if (!enumNames.has(enumItem.name)) {
+      enumNames.add(enumItem.name);
+      generateEnum(project, outputDir, enumItem);
+    }
+  });
+
+  prismaClientDmmf.schema.enumTypes.model?.forEach((enumItem) => {
+    if (!enumNames.has(enumItem.name)) {
+      enumNames.add(enumItem.name);
+      generateEnum(project, outputDir, enumItem);
+    }
+  });
+
   if (enumNames.size > 0) {
     const enumsIndexSourceFile = project.createSourceFile(
       path.resolve(outputDir, 'enums', 'index.ts'),
@@ -78,8 +98,28 @@ export async function generate(options: GeneratorOptions) {
     generateEnumsIndexFile(enumsIndexSourceFile, [...enumNames]);
   }
 
+
+
   prismaClientDmmf.datamodel.models.forEach((model) =>
     generateClass(project, config, model),
+  );
+
+  const inputObjectTypes = [
+    ...(prismaClientDmmf.schema.inputObjectTypes.prisma as any),
+    ...((prismaClientDmmf.schema.inputObjectTypes.model || []) as any),
+  ];
+
+  inputObjectTypes.forEach((inputType) =>
+    generateSchemaObject(project, config, inputType, 'inputs'),
+  );
+
+  const outputObjectTypes = [
+    ...(prismaClientDmmf.schema.outputObjectTypes.prisma as any),
+    ...((prismaClientDmmf.schema.outputObjectTypes.model || []) as any),
+  ];
+
+  outputObjectTypes.forEach((outputType) =>
+    generateSchemaObject(project, config, outputType, 'outputs'),
   );
 
   const helpersIndexSourceFile = project.createSourceFile(
@@ -90,5 +130,7 @@ export async function generate(options: GeneratorOptions) {
   generateHelpersIndexFile(helpersIndexSourceFile);
 
   generateModelsIndexFile(prismaClientDmmf, project, outputDir);
+  generateInputsIndexFile(inputObjectTypes, project, outputDir);
+  generateOutputsIndexFile(outputObjectTypes, project, outputDir);
   await project.save();
 }

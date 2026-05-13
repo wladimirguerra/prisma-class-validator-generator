@@ -5,7 +5,7 @@ import path from 'path';
 export default function generateEnum(
   project: Project,
   outputDir: string,
-  enumItem: PrismaDMMF.DatamodelEnum,
+  enumItem: PrismaDMMF.DatamodelEnum | PrismaDMMF.SchemaEnum,
 ) {
   const dirPath = path.resolve(outputDir, 'enums');
   const filePath = path.resolve(dirPath, `${enumItem.name}.enum.ts`);
@@ -17,10 +17,13 @@ export default function generateEnum(
     isExported: true,
     name: enumItem.name,
     members: enumItem.values.map<OptionalKind<EnumMemberStructure>>(
-      ({ name }) => ({
-        name,
-        value: name,
-      }),
+      (value) => {
+        const name = typeof value === 'string' ? value : value.name;
+        return {
+          name,
+          value: name,
+        };
+      },
     ),
   });
 }

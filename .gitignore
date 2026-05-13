@@ -5,3 +5,4 @@ npm-debug.log*
 prisma/generated
 coverage/
 tests/generated/
+.junie

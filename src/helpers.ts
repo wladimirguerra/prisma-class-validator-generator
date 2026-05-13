@@ -31,8 +31,58 @@ export const generateModelsIndexFile = (
   );
 };
 
+export const generateInputsIndexFile = (
+  inputTypes: any[],
+  project: Project,
+  outputDir: string,
+) => {
+  const inputsBarrelExportSourceFile = project.createSourceFile(
+    path.resolve(outputDir, 'inputs', 'index.ts'),
+    undefined,
+    { overwrite: true },
+  );
+
+  inputsBarrelExportSourceFile.addExportDeclarations(
+    inputTypes
+      .map((type) => type.name)
+      .sort()
+      .map<OptionalKind<ExportDeclarationStructure>>((name) => ({
+        moduleSpecifier: `./${name}.input.js`,
+        namedExports: [name],
+      })),
+  );
+};
+
+export const generateOutputsIndexFile = (
+  outputTypes: any[],
+  project: Project,
+  outputDir: string,
+) => {
+  const outputsBarrelExportSourceFile = project.createSourceFile(
+    path.resolve(outputDir, 'outputs', 'index.ts'),
+    undefined,
+    { overwrite: true },
+  );
+
+  outputsBarrelExportSourceFile.addExportDeclarations(
+    outputTypes
+      .map((type) => type.name)
+      .sort()
+      .map<OptionalKind<ExportDeclarationStructure>>((name) => ({
+        moduleSpecifier: `./${name}.output.js`,
+        namedExports: [name],
+      })),
+  );
+};
+
 export const shouldImportPrisma = (fields: PrismaDMMF.Field[]) => {
   return fields.some((field) => ['Decimal', 'Json'].includes(field.type));
+};
+
+export const shouldImportClassTransformer = (fields: PrismaDMMF.Field[]) => {
+  return fields.some(
+    (field) => field.kind === 'object' || field.type === 'Decimal',
+  );
 };
 
 export const shouldImportHelpers = (fields: PrismaDMMF.Field[]) => {
@@ -136,6 +186,24 @@ export const getDecoratorsByFieldType = (
       arguments: [],
     });
   }
+  if (field.kind === 'object') {
+    decorators.push({
+      name: 'Type',
+      arguments: [`() => ${field.type}`],
+    });
+  }
+
+  if (field.type === 'Decimal') {
+    decorators.push({
+      name: 'Transform',
+      arguments: [`(value) => value.toString()`, `{ toPlainOnly: true }`],
+    });
+    decorators.push({
+      name: 'Transform',
+      arguments: [`(value) => new Prisma.Decimal(value)`, `{ toClassOnly: true }`],
+    });
+  }
+
   if (field.kind === 'enum') {
     decorators.push({
       name: 'IsIn',
@@ -248,6 +316,13 @@ export const generateClassValidatorImport = (
   sourceFile.addImportDeclaration({
     moduleSpecifier: 'class-validator',
     namedImports: validatorImports,
+  });
+};
+
+export const generateClassTransformerImport = (sourceFile: SourceFile) => {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: 'class-transformer',
+    namedImports: ['Type', 'Transform'],
   });
 };
 

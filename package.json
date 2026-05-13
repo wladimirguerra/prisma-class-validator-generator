@@ -38,7 +38,8 @@
   "license": "MIT",
   "peerDependencies": {
     "@prisma/client": "^7",
-    "prisma": "^7"
+    "prisma": "^7",
+    "class-transformer":"*"
   },
   "dependencies": {
     "@prisma/generator-helper": "^7",

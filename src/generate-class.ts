@@ -3,6 +3,7 @@ import path from 'path';
 import { OptionalKind, Project, PropertyDeclarationStructure } from 'ts-morph';
 import type { GeneratorConfig } from './prisma-generator';
 import {
+  generateClassTransformerImport,
   generateClassValidatorImport,
   generateEnumImports,
   generateHelpersImports,
@@ -13,6 +14,7 @@ import {
   getDecoratorsImportsByType,
   getSwaggerImportsByType,
   getTSDataTypeFromFieldType,
+  shouldImportClassTransformer,
   shouldImportHelpers,
   shouldImportPrisma,
   shouldImportSwagger,
@@ -54,6 +56,10 @@ function generateSingleClass(
   }
 
   generateClassValidatorImport(sourceFile, validatorImports as Array<string>);
+
+  if (shouldImportClassTransformer(model.fields as PrismaDMMF.Field[])) {
+    generateClassTransformerImport(sourceFile);
+  }
 
   // Add Swagger imports if enabled
   if (
@@ -149,6 +155,10 @@ function generateBaseClass(
 
   generateClassValidatorImport(sourceFile, validatorImports as Array<string>);
 
+  if (shouldImportClassTransformer(model.fields as PrismaDMMF.Field[])) {
+    generateClassTransformerImport(sourceFile);
+  }
+
   // Add Swagger imports if enabled
   if (config.swagger && shouldImportSwagger(fields as PrismaDMMF.Field[])) {
     const swaggerImports = getSwaggerImportsByType(
@@ -202,6 +212,10 @@ function generateRelationClass(
   ];
 
   generateClassValidatorImport(sourceFile, validatorImports as Array<string>);
+
+  if (shouldImportClassTransformer(model.fields as PrismaDMMF.Field[])) {
+    generateClassTransformerImport(sourceFile);
+  }
 
   // Add Swagger imports if enabled
   if (
@@ -291,6 +305,10 @@ function generateCombinedClass(
 
   if (validatorImports.length > 0) {
     generateClassValidatorImport(sourceFile, validatorImports as Array<string>);
+  }
+
+  if (shouldImportClassTransformer(model.fields as PrismaDMMF.Field[])) {
+    generateClassTransformerImport(sourceFile);
   }
 
   // Add Swagger imports if enabled
